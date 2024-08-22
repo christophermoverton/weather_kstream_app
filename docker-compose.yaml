@@ -1,0 +1,17 @@
+version: '3.8'
+services:
+  kafka-streams-app:
+    image: weather-alert-stream-app:latest
+    depends_on:
+      - kafka
+    environment:
+      - KAFKA_BOOTSTRAP_SERVERS=kafka:9092  # This assumes Kafka is accessible at this address
+    networks:
+      - kafka-network
+    restart: on-failure  # Optionally restart on failure
+
+networks:
+  kafka-network:
+    external: true
+
+
