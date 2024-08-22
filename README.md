@@ -85,7 +85,7 @@ First, clone this repository to your local machine:
 
 ```bash
 git clone https://github.com/christophermoverton/weather_kstream_app.git
-cd weather-alert-kafka-streams-app
+cd weather_kstream_app
 ```
 
 ### Step 2: Build the Application Locally
