@@ -84,7 +84,7 @@ The key components of this project include:
 First, clone this repository to your local machine:
 
 ```bash
-git clone https://github.com/your-username/weather-alert-kafka-streams-app.git
+git clone https://github.com/christophermoverton/weather_kstream_app.git
 cd weather-alert-kafka-streams-app
 ```
 
