@@ -7,11 +7,68 @@ This project is a Kafka Streams application that processes weather alert data in
 
 Before you begin, ensure that you have the following installed on your local machine:
 
-- Docker
-- Docker Compose
-- Kafka & Zookeeper (Dockerized)
+- **Docker**
+- **Docker Compose**
+- **Java JDK (11 or later)**
+- **Maven**
+- **Kafka & Zookeeper (Dockerized)**
 
 This project is designed to be used with the [Dockerized Kafka and Zookeeper setup](https://github.com/christophermoverton/docker_kafka_weatheralert). Be sure to follow the instructions provided in that repository to set up Kafka and Zookeeper services properly.
+
+### Installing Java JDK & Maven
+
+To build and run the application locally before deploying with Docker, you'll need to have Java JDK and Maven installed.
+
+#### Install Java JDK (11 or later)
+
+**Ubuntu/Debian:**
+
+```bash
+sudo apt update
+sudo apt install openjdk-11-jdk
+```
+
+**MacOS (using Homebrew):**
+
+```bash
+brew tap AdoptOpenJDK/openjdk
+brew install --cask adoptopenjdk11
+```
+
+**Windows:**
+
+Download the JDK installer from the [Oracle website](https://www.oracle.com/java/technologies/javase-jdk11-downloads.html) and follow the installation instructions.
+
+Verify the installation:
+
+```bash
+java -version
+```
+
+#### Install Maven
+
+**Ubuntu/Debian:**
+
+```bash
+sudo apt update
+sudo apt install maven
+```
+
+**MacOS (using Homebrew):**
+
+```bash
+brew install maven
+```
+
+**Windows:**
+
+Download the Maven binary from the [Apache Maven website](https://maven.apache.org/download.cgi) and follow the installation instructions.
+
+Verify the installation:
+
+```bash
+mvn -version
+```
 
 ## Project Structure
 
@@ -20,7 +77,7 @@ The key components of this project include:
 - **Kafka Streams App**: The core of the application that processes incoming Kafka messages.
 - **Kafka & Zookeeper**: The services necessary for running the Kafka broker and managing its distributed systems.
 
-## Setup & Run the Application
+## Build & Run the Application
 
 ### Step 1: Clone the Repository
 
@@ -31,7 +88,19 @@ git clone https://github.com/your-username/weather-alert-kafka-streams-app.git
 cd weather-alert-kafka-streams-app
 ```
 
-### Step 2: Kafka & Zookeeper
+### Step 2: Build the Application Locally
+
+Before deploying the application with Docker, you can build it locally using Maven to ensure everything is set up correctly.
+
+Run the following command in the project root directory:
+
+```bash
+mvn clean install
+```
+
+This will compile the Java code and package the application into a JAR file located in the `target/` directory.
+
+### Step 3: Kafka & Zookeeper Setup
 
 Ensure that you have Kafka and Zookeeper services already running. If not, you can set them up using the provided Dockerized Kafka and Zookeeper setup [here](https://github.com/christophermoverton/docker_kafka_weatheralert). These services should be configured with the correct network (`kafka-network`) and use the following listener:
 
@@ -39,11 +108,11 @@ Ensure that you have Kafka and Zookeeper services already running. If not, you c
 KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://kafka:9092
 ```
 
-### Step 3: Build and Run the Application
+### Step 4: Build and Run the Dockerized Application
 
-Use Docker Compose to build and run the Kafka Streams application. The `docker-compose.yml` file is configured to handle the build process and run the container.
+Once you've built the application locally, you can now build and run the Docker containers using Docker Compose.
 
-Run the following command to build the image and start the containers:
+Run the following command to build the Docker image and start the containers:
 
 ```bash
 sudo docker-compose up --build
@@ -54,7 +123,7 @@ This command will:
 - Build the Kafka Streams application Docker image.
 - Start the Kafka Streams application container and attach it to the correct network.
 
-### Step 4: Verify the Application
+### Step 5: Verify the Application
 
 Once the application is running, check the logs to verify that it is successfully connecting to the Kafka broker and processing messages.
 
@@ -64,7 +133,7 @@ To view the logs, run:
 sudo docker logs -f weather_alert_app
 ```
 
-### Step 5: Stopping the Application
+### Step 6: Stopping the Application
 
 To stop the application and all running containers, run:
 
@@ -131,3 +200,4 @@ Feel free to open issues or submit pull requests to improve this application.
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
